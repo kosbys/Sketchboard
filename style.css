@@ -1,4 +1,21 @@
-.container {
+body {
     display: flex;
+    align-items:center;
     justify-content: center;
+}
+
+
+.container {
+  border: 5px solid black;
+  display: inline-block;
+  width: 960px;
+  height: 960px;
+
+}
+
+.cell {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  background: white;
 }
