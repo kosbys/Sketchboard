@@ -1,8 +1,11 @@
-const container = document.querySelector(".grid");
+const container = document.querySelector(`.grid`);
 
 const reset = document.querySelector(`.reset`);
 
 const slider = document.querySelector(`.slider`);
+
+let rainbow = document.querySelector(`.rainbow`);
+
 function start(size = 16) {
   container.style.cssText = `display: grid;
     grid-template-columns: repeat(${size}, ${960 / size}px);
@@ -16,13 +19,21 @@ function start(size = 16) {
     }
   }
 
-  const cells = document.querySelectorAll(".cell");
+  let cells = findCells();
 
   cells.forEach((cell) => {
-    cell.addEventListener("mouseover", () => {
-      cell.style.cssText = "background-color: black;";
-    });
+    cellColor(cell);
   });
+}
+
+function cellColor(cell, color = "black") {
+  cell.addEventListener("mouseover", () => {
+    cell.style.cssText = `background-color: ${color};`;
+  });
+}
+
+function findCells() {
+  return document.querySelectorAll(".cell");
 }
 
 const resetGrid = function () {
@@ -32,6 +43,29 @@ const resetGrid = function () {
 const updateSlider = function () {
   const sliderText = document.querySelector(`.slider-text`);
   sliderText.innerText = `Current size: ${slider.value} ✕ ${slider.value}`;
+};
+
+function randomRgba() {
+  var o = Math.round,
+    r = Math.random,
+    s = 255;
+  return "rgb(" + o(r() * s) + "," + o(r() * s) + "," + o(r() * s) + ")";
+}
+
+const toggleRainbow = function () {
+  let cells = findCells();
+
+  if (rainbow.value == `false`) {
+    rainbow.value = `true`;
+    cells.forEach((cell) => {
+      cellColor(cell, randomRgba());
+    });
+  } else {
+    rainbow.value = `false`;
+    cells.forEach((cell) => {
+      cellColor(cell, `black`);
+    });
+  }
 };
 
 reset.addEventListener("click", () => {
@@ -46,6 +80,10 @@ slider.addEventListener("input", () => {
 slider.addEventListener("mouseup", () => {
   resetGrid();
   start(slider.value);
+});
+
+rainbow.addEventListener("click", () => {
+  toggleRainbow();
 });
 
 function removeAllChildNodes(parent) {
