@@ -1,16 +1,30 @@
+@import url("https://fonts.googleapis.com/css2?family=Arvo&display=swap");
+
 body {
-    display: flex;
-    align-items:center;
-    justify-content: center;
+  font-family: "Arvo", serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(136, 57, 239);
+  background: linear-gradient(
+    90deg,
+    rgba(136, 57, 239, 1) 0%,
+    rgba(32, 159, 181, 1) 87%
+  );
 }
 
+.sidebar {
+  color: aliceblue;
+  text-align: center;
+  margin-right: 50px;
+  margin-bottom: 100px;
+}
 
 .container {
   border: 5px solid black;
   display: inline-block;
   width: 960px;
   height: 960px;
-
 }
 
 .cell {
@@ -18,4 +32,5 @@ body {
   align-items: center;
   display: flex;
   background: white;
+  border: 1px solid black;
 }
