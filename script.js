@@ -26,31 +26,22 @@ function start(size = 16) {
   });
 }
 
-function cellColor(cell, color = "black") {
+const resetGrid = function () {
+  removeAllChildNodes(container);
+};
+const findCells = function () {
+  return document.querySelectorAll(".cell");
+};
+const cellColor = function (cell, color = "black") {
   cell.addEventListener("mouseover", () => {
     cell.style.cssText = `background-color: ${color};`;
   });
-}
-
-function findCells() {
-  return document.querySelectorAll(".cell");
-}
-
-const resetGrid = function () {
-  removeAllChildNodes(container);
 };
 
 const updateSlider = function () {
   const sliderText = document.querySelector(`.slider-text`);
   sliderText.innerText = `Current size: ${slider.value} ✕ ${slider.value}`;
 };
-
-function randomRgba() {
-  var o = Math.round,
-    r = Math.random,
-    s = 255;
-  return "rgb(" + o(r() * s) + "," + o(r() * s) + "," + o(r() * s) + ")";
-}
 
 const toggleRainbow = function () {
   let cells = findCells();
@@ -67,6 +58,8 @@ const toggleRainbow = function () {
     });
   }
 };
+
+/* Event listeners */
 
 reset.addEventListener("click", () => {
   resetGrid();
@@ -86,10 +79,20 @@ rainbow.addEventListener("click", () => {
   toggleRainbow();
 });
 
+/* Helper functions */
+
 function removeAllChildNodes(parent) {
   while (parent.firstChild) {
     parent.removeChild(parent.firstChild);
   }
 }
 
+function randomRgba() {
+  var o = Math.round,
+    r = Math.random,
+    s = 255;
+  return "rgb(" + o(r() * s) + "," + o(r() * s) + "," + o(r() * s) + ")";
+}
+
+/* init */
 start();
